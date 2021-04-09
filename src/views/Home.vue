@@ -1,18 +1,30 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Catalog />
+    <Card v-if="CART.length" v-bind:cart_data="CART" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Catalog from "../components/Catalog";
+import Card from "../components/Cart";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    Card,
+    Catalog,
+  },
+  computed: {
+    ...mapGetters(["CART"]),
   },
 };
 </script>
+
+<style>
+.home {
+  max-width: 900px;
+  margin: 0 auto;
+}
+</style>
