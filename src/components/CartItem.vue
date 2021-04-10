@@ -10,13 +10,28 @@
       <p>Price: {{ cart_item_data.price }}</p>
     </div>
     <div class="cart_item__quantity">
-      Quantity:{{ cart_item_data.quantity }}
+      <p>Quantity:</p>
+      <button
+        class="btn"
+        v-on:click.prevent="decrementItem(cart_item_data.article)"
+      >
+        -
+      </button>
+      <span style="margin: 0 10px 0 10px">{{ cart_item_data.quantity }}</span>
+      <button
+        class="btn"
+        v-on:click.prevent="incrementItem(cart_item_data.article)"
+      >
+        +
+      </button>
     </div>
-    <button v-on:click="deleteCartItem">Delete</button>
+    <button class="btn delete" v-on:click="deleteCartItem">Delete</button>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "CartItem",
   props: {
@@ -28,6 +43,14 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["DECREMENT_CART_ITEM", "INCREMENT_CART_ITEM"]),
+    incrementItem(article) {
+      this.INCREMENT_CART_ITEM(article);
+    },
+    decrementItem(article) {
+      this.DECREMENT_CART_ITEM(article);
+    },
+
     deleteCartItem() {
       this.$emit("deleteCartItem");
     },

@@ -36,6 +36,20 @@ export default createStore({
         state.cartValue += item.quantity;
       });
     },
+    INCREMENT: (state, article) => {
+      const i = state.cart.findIndex((item) => item.article === article);
+      state.cart[i].quantity += 1;
+      if (!state.cart[i].quantity) {
+        state.cart.splice(i, 1);
+      }
+    },
+    DECREMENT: (state, article) => {
+      const i = state.cart.findIndex((item) => item.article === article);
+      state.cart[i].quantity -= 1;
+      if (!state.cart[i].quantity) {
+        state.cart.splice(i, 1);
+      }
+    },
   },
   actions: {
     GET_PRODUCTS_FROM_API({ commit }) {
@@ -54,11 +68,18 @@ export default createStore({
     ADD_TO_CART({ commit }, product) {
       commit("SET_PRODUCT_TO_STATE", product);
     },
-    DELETE_FROM_CART({ commit }, index) {
+    DELETE_FROM_CART({ commit, dispatch }, index) {
       commit("REMOVE_FROM_CART", index);
+      dispatch("CALC_CART_VALUE");
     },
     CALC_CART_VALUE({ commit }) {
       commit("CART_VALUE_CALC");
+    },
+    DECREMENT_CART_ITEM({ commit }, article) {
+      commit("DECREMENT", article);
+    },
+    INCREMENT_CART_ITEM({ commit }, article) {
+      commit("INCREMENT", article);
     },
   },
   modules: {},

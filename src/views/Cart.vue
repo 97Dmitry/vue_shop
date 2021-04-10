@@ -7,13 +7,16 @@
     <div v-if="!CART.length">
       <h1>Your cart is empty</h1>
     </div>
-    <div v-else :key="CART.length">
+    <div class="cart__content" v-else>
       <CartItem
         v-for="(item, index) in CART"
         v-bind:cart_item_data="item"
         :key="item.arcticl"
         v-on:deleteCartItem="deleteCartItem(index)"
       />
+    </div>
+    <div class="cart__total-price">
+      <p>Total: {{ totalPrice }} р.</p>
     </div>
   </div>
 </template>
@@ -29,6 +32,12 @@ export default {
   },
   computed: {
     ...mapGetters(["CART"]),
+    totalPrice() {
+      return this.CART.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      ).toFixed(2);
+    },
   },
   components: {
     CartItem,
