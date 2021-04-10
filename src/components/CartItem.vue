@@ -32,24 +32,7 @@ export default {
       this.$emit("deleteCartItem");
     },
   },
-  mounted() {
-    // eslint-disable-next-line vue/no-mutating-props
-    this.cart_item_data.quantity = 1;
-  },
 };
 </script>
 
-<style lang="scss">
-.cart_item {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 0 8px 0 #e0e0e0;
-  padding: $padding * 2;
-  margin-bottom: $margin * 2;
-  &__image {
-    width: 100px;
-  }
-}
-</style>
+<style lang="scss"></style>

@@ -1,0 +1,67 @@
+// Основные настройки
+#app {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.navigate_link {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: $padding*2;
+  border: 1px solid #2c3e50;
+}
+
+/////////////////////
+//Catalog
+.catalog {
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+//Catalog item
+.catalog-item {
+  height: 250px;
+  flex-basis: 25%;
+  box-shadow: 0 0 8px 0 #e0e0e0;
+  padding: $padding * 2;
+  margin-bottom: $margin * 2;
+
+  &__image {
+    width: 100px;
+  }
+}
+
+////////////////////
+//Cart
+.cart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+//Cart item
+.cart_item {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 8px 0 #e0e0e0;
+  padding: $padding * 2;
+  margin-bottom: $margin * 2;
+
+  &__image {
+    width: 100px;
+  }
+}

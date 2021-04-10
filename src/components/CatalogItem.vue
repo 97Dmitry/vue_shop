@@ -27,6 +27,10 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+    // eslint-disable-next-line vue/no-mutating-props
+    // this.product_data.quantity = 1;
+  },
   methods: {
     addToCard() {
       this.$emit("addToCard", this.product_data);
@@ -35,15 +39,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.catalog-item {
-  height: 250px;
-  flex-basis: 25%;
-  box-shadow: 0 0 8px 0 #e0e0e0;
-  padding: $padding * 2;
-  margin-bottom: $margin * 2;
-  &__image {
-    width: 100px;
-  }
-}
-</style>
+<style lang="scss"></style>

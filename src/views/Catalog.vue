@@ -7,8 +7,11 @@
     <h1>Загрузка...</h1>
   </div>
   <div class="catalog" v-else>
+    <router-link :to="{ name: 'Cart' }">
+      <div class="navigate_link">Cart: {{ CART_VALUE }}</div>
+    </router-link>
     <h1>Catalog</h1>
-    <div class="catalog-content">
+    <div class="catalog__content">
       <CatalogItem
         v-for="product in PRODUCTS"
         v-bind:product_data="product"
@@ -20,7 +23,7 @@
 </template>
 
 <script>
-import CatalogItem from "./CatalogItem";
+import CatalogItem from "../components/CatalogItem";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -36,8 +39,10 @@ export default {
   methods: {
     ...mapActions(["GET_PRODUCTS_FROM_API"]),
     ...mapActions(["ADD_TO_CART"]),
-    addToCard(data) {
-      this.ADD_TO_CART(data);
+    ...mapActions(["CALC_CART_VALUE"]),
+    async addToCard(data) {
+      await this.ADD_TO_CART(data);
+      await this.CALC_CART_VALUE();
     },
   },
   mounted() {
@@ -49,17 +54,10 @@ export default {
   },
   computed: {
     ...mapGetters(["PRODUCTS"]),
+    ...mapGetters(["CART"]),
+    ...mapGetters(["CART_VALUE"]),
   },
 };
 </script>
 
-<style lang="scss">
-.catalog {
-  .catalog-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-</style>
+<style lang="scss"></style>
