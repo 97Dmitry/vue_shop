@@ -5,6 +5,7 @@ export default createStore({
   state: {
     products: [],
     cart: [],
+    cartValue: 0,
   },
   mutations: {
     SET_PRODUCTS_TO_STATE: (state, products) => {
@@ -20,14 +21,20 @@ export default createStore({
           }
         });
         if (!isProductExists) {
-          state.cart.push(product);
+          state.cart.push({ ...product, quantity: 1 });
         }
       } else {
-        state.cart.push(product);
+        state.cart.push({ ...product, quantity: 1 });
       }
     },
     REMOVE_FROM_CART: (state, index) => {
       state.cart.splice(index, 1);
+    },
+    CART_VALUE_CALC: (state) => {
+      state.cartValue = 0;
+      state.cart.map((item) => {
+        state.cartValue += item.quantity;
+      });
     },
   },
   actions: {
@@ -50,6 +57,9 @@ export default createStore({
     DELETE_FROM_CART({ commit }, index) {
       commit("REMOVE_FROM_CART", index);
     },
+    CALC_CART_VALUE({ commit }) {
+      commit("CART_VALUE_CALC");
+    },
   },
   modules: {},
   getters: {
@@ -58,6 +68,9 @@ export default createStore({
     },
     CART(state) {
       return state.cart;
+    },
+    CART_VALUE(state) {
+      return state.cartValue;
     },
   },
 });
