@@ -45,6 +45,7 @@
 
 //Catalog item
 .catalog-item {
+  position: relative;
   height: 250px;
   flex-basis: 25%;
   box-shadow: 0 0 8px 0 #e0e0e0;
@@ -53,6 +54,15 @@
 
   &__image {
     width: 100px;
+  }
+
+  &__description {
+    margin-top: 155px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 }
 
